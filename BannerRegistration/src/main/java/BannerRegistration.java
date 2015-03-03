@@ -19,7 +19,11 @@ public class BannerRegistration
   }
 
 
-
+  /**
+   * information extraction from textual data.
+   * @param s
+   * @return
+   */
   public String displayTestCase (String s)
   { 
     String result = null;
