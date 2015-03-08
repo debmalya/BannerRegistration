@@ -8,9 +8,9 @@ public class FrequencyCounter {
 	
 	private Map<String,Integer> frequencyMap = new TreeMap<String,Integer>();
 	
-	public void displayText(String text) {
-		String[] values = text.split(" ");
-		totalWordCount = values.length;
+	public void updateCount(String[] values) {
+		
+		totalWordCount += values.length;
 		for (String eachWord:values) {
 			Integer count = frequencyMap.get(eachWord);
 			if (count == null) {

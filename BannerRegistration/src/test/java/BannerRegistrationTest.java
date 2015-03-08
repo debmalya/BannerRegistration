@@ -12,17 +12,25 @@ public class BannerRegistrationTest {
 	@Test
 	public void testSentenceParse() {
 		BannerRegistration reg = new BannerRegistration();
-		String[] sentences = reg.parseSentence(PARAGRAPH_TWO_SENTENCE);
+		String[] sentences = reg.parseParagrpah(PARAGRAPH_TWO_SENTENCE);
 		Assert.assertEquals(2,sentences.length);
 		for (String each:sentences) {
 			System.out.println(SEPARATOR);
 			System.out.println(each);
 			System.out.println(SEPARATOR);
-			String[] values = reg.getEachPartOfSentence(each);
+			String[] values = reg.parseSentence(each);
 			for (String eachPart: values) {
 				System.out.println(eachPart);
 			}
 		}
+	}
+	
+	@Test
+	public void testDisplayText() {
+		BannerRegistration reg = new BannerRegistration();
+		reg.displayTestCase(PARAGRAPH_TWO_SENTENCE);
+		System.out.println("Total words :" + reg.getTotalWordCount());
+		System.out.println("Frequency map :" + reg.getFrequencyMap());
 	}
 
 }

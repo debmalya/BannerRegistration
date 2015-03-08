@@ -1,6 +1,17 @@
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class BannerRegistration {
+
+	/**
+	 * Total number of words.
+	 */
+	private int totalWordCount;
+
+	/**
+	 * Frequency map - key is string and number of occurrences is the value.
+	 */
+	private Map<String, Integer> frequencyMap = new TreeMap<String, Integer>();
 
 	public BannerRegistration() {
 		// TODO Auto-generated constructor stub
@@ -12,6 +23,14 @@ public class BannerRegistration {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public int getTotalWordCount() {
+		return totalWordCount;
+	}
+
+	public Map<String, Integer> getFrequencyMap() {
+		return frequencyMap;
 	}
 
 	/**
@@ -31,6 +50,13 @@ public class BannerRegistration {
 	 */
 	public String displayTestCase(String s) {
 		String result = null;
+		String[] sentences = parseParagrpah(s);
+
+		for (String eachSentence : sentences) {
+			String[] parts = parseSentence(eachSentence);
+			String[] words = getParts(eachSentence," ");
+			updateCount(words);
+		}
 		return result;
 	}
 
@@ -41,8 +67,8 @@ public class BannerRegistration {
 	 *            paragraph.
 	 * @return list of sentences.
 	 */
-	public String[] parseSentence(String s) {
-		return getParts(s,"[.]");
+	public String[] parseParagrpah(String s) {
+		return getParts(s, "[.]");
 	}
 
 	/**
@@ -52,11 +78,39 @@ public class BannerRegistration {
 	 *            - one complete sentence.
 	 * @return String array after splitting the sentence by ",".
 	 */
-	public String[] getEachPartOfSentence(String s) {
-		return getParts(s,",");
+	public String[] parseSentence(String s) {
+		return getParts(s, ",");
 	}
-	
-	public String[] getParts(String s,String splitter) {
+
+	/**
+	 * To split a string based on specified splitter ([.],",")
+	 * 
+	 * @param s
+	 *            string to be splitter.
+	 * @param splitter
+	 *            character (e.g . ,)
+	 * @return
+	 */
+	public String[] getParts(String s, String splitter) {
 		return s != null ? s.split(splitter) : null;
+	}
+
+	/**
+	 * Update total word count and frequency count of each word.
+	 * @param values - words in the paragraph.
+	 * 
+	 */
+	public void updateCount(String[] values) {
+
+		totalWordCount += values.length;
+		for (String eachWord : values) {
+			Integer count = frequencyMap.get(eachWord);
+			if (count == null) {
+				count = 0;
+			}
+			frequencyMap.put(eachWord, ++count);
+
+		}
+
 	}
 }
